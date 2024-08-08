@@ -5,6 +5,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase';
 import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
+import HomePage from './components/HomePage';
 
 
 const App = () => {
@@ -14,6 +15,7 @@ const App = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/" element={<Navigate to="/login" />} />
+          <Route path="/homepage" element={<HomePage />} />
         </Routes>
       </Router>
     );
