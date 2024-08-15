@@ -130,30 +130,3 @@
   position: fixed;
   bottom: 0;
 }
-.content {
-  flex: 1;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #f2f1f1;
-  background-size: cover;
-  background-position: center;
-  transition: background-image 0.3s ease-in-out;
-}
-
-.content.fruits {
-  background-image: url("../../public/images/fruitsbg.jpg");  
-}
-
-.content.vegetables {
-  background-image: url("../../public/images/vegetablesbg.jpg");  
-}
-
-.content.snacks {
-  background-image: url("../../public/images/snacksbd.webp");  
-}
-
-.content.flowers {
-  background-image: url("../../public/images/flowersbd.jpg");  
-}

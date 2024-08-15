@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { db, realtimedb } from '../firebase';
+import { doc, updateDoc } from 'firebase/firestore';
 import { ref, get, update } from 'firebase/database';
 import '../css/EditProfileModal.css';
 
