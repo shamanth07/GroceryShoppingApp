@@ -15,9 +15,6 @@
     text-align: center;
     padding: 20px;
   }
-  
-  
-  
   .admin-content h1 {
     color: #333;
   }
@@ -55,7 +52,7 @@
     display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-left: 8%;
+  /* margin-left: 8%; */
   padding-top: 5%;
   padding-bottom: 10%;
   background-color: #efefef;

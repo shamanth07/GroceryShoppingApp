@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { db, realtimedb } from '../firebase';
-import { collection, getDocs } from 'firebase/firestore';
 import { ref, get } from 'firebase/database';
 import NavBar from './Navbar';
 import Footer from '../components/Footer';

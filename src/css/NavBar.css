@@ -1,0 +1,91 @@
+
+
+.navbar {
+  background-color: #333;
+  padding: 10px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.navbar-content {  
+  margin-right: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app-name {
+  color: white;
+  font-size: 24px;
+}
+
+.nav-list {
+  list-style-type: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  gap: 15px;
+}
+
+.nav-list a {
+  color: white;
+  text-decoration: none;
+  padding: 10px 15px;
+}
+
+.nav-list a:hover {
+  background-color: #575757;
+  border-radius: 5px;
+}
+
+.navbar-buttons {
+  display: flex;
+  margin-right: 5%;
+  align-items: center;
+}
+
+.navbar-buttons a {
+  margin-right: 15px;
+  color: white;
+  font-size: 24px;
+  text-decoration: none;
+}
+
+.navbar-buttons button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.navbar-buttons button:hover {
+  background-color: #007bffb0;
+}
+
+.hamburger {
+  display: none;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .nav-list {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .nav-list.show {
+    display: flex;
+  }
+
+  .hamburger {
+    display: block;
+  }
+}

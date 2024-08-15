@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { db } from '../firebase';
+import { db, realtimedb } from '../firebase';
+import { ref, get, update } from 'firebase/database';
 import { collection, doc, getDoc, getDocs, updateDoc } from 'firebase/firestore';
 import '../css/ModifyProductForm.css';
 
@@ -11,40 +12,74 @@ const ModifyProductForm = ({ category, productId, onClose }) => {
   const [image, setImage] = useState('');
 
   useEffect(() => {
+    // const fetchProductDetails = async () => {
+    //     try {
+    //         const docRef = doc(db, category, productId);
+    //         const docSnap = await getDoc(docRef);
+    //         if (docSnap.exists()) {
+    //           const productData = docSnap.data();
+    //           setName(productData.name);
+    //           setDescription(productData.description);
+    //           setPrice(productData.price);
+    //           setQuantity(productData.quantity);
+    //           setImage(productData.image);
+    //         }
+    //     } catch (error) {
+    //       console.error('Error fetching products:', error);
+    //     }
+    //   };
+
     const fetchProductDetails = async () => {
-        try {
-            const docRef = doc(db, category, productId);
-            const docSnap = await getDoc(docRef);
-            if (docSnap.exists()) {
-              const productData = docSnap.data();
-              setName(productData.name);
-              setDescription(productData.description);
-              setPrice(productData.price);
-              setQuantity(productData.quantity);
-              setImage(productData.image);
-            }
-        } catch (error) {
-          console.error('Error fetching products:', error);
+      try {
+        const productRef = ref(realtimedb, `${category}/${productId}`);
+        const snapshot = await get(productRef);
+
+        if (snapshot.exists()) {
+          const productData = snapshot.val();
+          setName(productData.name);
+          setDescription(productData.description);
+          setPrice(productData.price);
+          setQuantity(productData.quantity);
+          setImage(productData.image);
+        } else {
+          console.log('No product data available');
         }
-      };
+      } catch (error) {
+        console.error('Error fetching product details:', error);
+      }
+    };
 
     fetchProductDetails();
   }, [category, productId]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // try {
+    //   const productRef = doc(db, category, productId);
+    //   await updateDoc(productRef, {
+    //     name,
+    //     description,
+    //     price: Number(price),
+    //     quantity: Number(quantity),
+    //     image
+    //   });
+    //   alert('Product updated successfully')
+    //   onClose();
     try {
-      const productRef = doc(db, category, productId);
-      await updateDoc(productRef, {
+      const productRef = ref(realtimedb, `${category}/${productId}`);
+      
+      await update(productRef, {
         name,
         description,
         price: Number(price),
         quantity: Number(quantity),
         image
       });
-      alert('Product updated successfully')
+      
+      alert('Product updated successfully');
       onClose();
-    } catch (error) {
+    } 
+    catch (error) {
       console.error('Error updating product:', error);
     }
   };
