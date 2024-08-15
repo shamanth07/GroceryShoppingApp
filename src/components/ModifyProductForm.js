@@ -54,17 +54,6 @@ const ModifyProductForm = ({ category, productId, onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // try {
-    //   const productRef = doc(db, category, productId);
-    //   await updateDoc(productRef, {
-    //     name,
-    //     description,
-    //     price: Number(price),
-    //     quantity: Number(quantity),
-    //     image
-    //   });
-    //   alert('Product updated successfully')
-    //   onClose();
     try {
       const productRef = ref(realtimedb, `${category}/${productId}`);
       
