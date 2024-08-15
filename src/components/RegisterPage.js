@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { auth, db } from '../firebase'; 
+import { auth, db, realtimedb } from '../firebase'; 
 import { useNavigate, Link } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { setDoc, doc } from 'firebase/firestore';
+import { ref, set } from 'firebase/database';
 import '../css/RegisterPage.css';
 
 const RegistrationPage = () => {
@@ -67,25 +68,28 @@ const RegistrationPage = () => {
 
     setLoading(true);
     try {
-      
+      // Create a new user with email and password
       const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+      // Get the newly created user object
       const user = userCredential.user;
 
       if (user) {
-        const { email, firstName, lastName, mobile, address } = formData;
+      const { email, firstName, lastName, mobile, address } = formData;
 
-        await setDoc(doc(db, 'Users', user.uid), {
+        const userRef = ref(realtimedb, `Users/${user.uid}`);
+        await set(userRef, {
           firstName,
           lastName,
           email,
           mobile,
           address,
-          isAdmin:false
+          isAdmin: false,
         });
         alert('User registered successfully');
         navigate('/login');
       }
     } catch (error) {
+      alert("Error registering: " + error);
       console.error('Error registering:', error);
     } finally {
       setLoading(false);
