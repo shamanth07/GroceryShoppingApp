@@ -62,18 +62,6 @@ const AddProductForm = ({ category, onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // await addDoc(collection(db, category), {
-      //   id: id.toString(),
-      //   name,
-      //   description,
-      //   price: Number(price),
-      //   quantity: Number(quantity),
-      //   image: '/images/default.jpg'
-      // });
-      // alert(name + '   added successfully')
-      // onClose();
-
-
       const categoryRef = ref(realtimedb, category);
 
       // Add new product using push() to create a unique key
